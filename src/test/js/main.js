@@ -13,9 +13,10 @@
   let velX = 0;
   let velY = 0;
   let maxVel = 20;
-  let acceleration = 1.3;
-  let deceleration = 5;
+  let acceleration = 2;
+  let deceleration = 2.8;
   let tempo = 5;
+  let maxSpeed = 200;
 
 
   //Key Detection
@@ -81,24 +82,56 @@ function displayVelY(){
   text(velY, 200, 10);
 }
 
-//VelX, VelY, maxVel, acceleration, deceleration, tempo, playerPosX, playerPosY (WIP)
-/*
+//VelX, VelY, maxVel, acceleration, deceleration, tempo, playerPosX, playerPosY, maxSpeed (WIP)
 function playerMovement(){
-  if(KeyW === true) {
-    velY += tempo*acceleration*-1;
-    playerPosY += velY;
-  }
+    if(KeyW === true) {
+      velY += (tempo + (acceleration*acceleration))*-1;
+      playerPosY += velY/10;
+    } else if((KeyW === false) && (velY < 0)){
+      playerPosY += velY/10;
+      velY += 10;
+    }
 
-  if(KeyS === true) {
-    velY += tempo*acceleration;
-    playerPosY += velY;
-  }
+    if(KeyA === true) {
+      velX += (tempo + (acceleration*acceleration))*-1;
+      playerPosX += velX/10;
+    } else if((KeyA === false) && (velX < 0)){
+      playerPosX += velX/10;
+      velX += 10;
+    } 
 
-  if(velY > maxVel) {velY = maxVel}
-  if(velY < maxVel*-1) {velY = maxVel*-1}
-  if(velY > 0) {velY -= deceleration}
+    if(KeyS === true) {
+      velY += (tempo + (acceleration*acceleration));
+      playerPosY += velY/10;
+    } else if((KeyS === false) && (velY > 0)){
+      playerPosY += velY/10;
+      velY -= 10;
+    }
+
+    if(KeyD === true) {
+      velX += (tempo + (acceleration*acceleration));
+      playerPosX += velX/10;
+    } else if((KeyS === false) && (velX > 0)){
+      playerPosX += velX/10;
+      velX -= 10;
+    } 
+
+  if(velY < -maxSpeed){
+    velY -= (velY + maxSpeed);
+  }
+  if(velY > maxSpeed){
+    velY -= (velY - maxSpeed)
+  }
+  if(velX < -maxSpeed){
+    velX -= (velX + maxSpeed)
+  }
+  if(velX > maxSpeed){
+    velX -= (velX - maxSpeed)
+  } 
+
+
+
 }
-*/
 
 function drawPlayer(){
   fill(0);
